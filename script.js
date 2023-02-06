@@ -4,17 +4,22 @@ function getComputerChoice(){
     return choices[randomChoice];
 }
 
+let win = 0;
+
 function round(playerSelection, computerSelection){
-    if (playerSelection.toLowerCase() === 'rock' && computerSelection === 'scissors'){
-        return 'You win! rock beats scissors';        
+    if (playerSelection === 'rock' && computerSelection === 'scissors'){
+        win++;
+        return 'You win! rock beats scissors';
     }
-    else if(playerSelection.toLowerCase() === 'paper' && computerSelection === 'rock'){
+    else if(playerSelection === 'paper' && computerSelection === 'rock'){
+        win++;
         return 'You win! paper beats rock anytime gg'; 
     }
-    else if(playerSelection.toLowerCase() === 'scissors' && computerSelection === 'paper'){
+    else if(playerSelection === 'scissors' && computerSelection === 'paper'){
+        win++;
         return 'GG EZ! scissors beats paper easy.';
     }
-    else if(playerSelection.toLowerCase() === computerSelection){
+    else if(playerSelection === computerSelection){
         return 'Aw! shucs, its a TIE!';
     }
     else{
@@ -24,12 +29,21 @@ function round(playerSelection, computerSelection){
 
 function game(){
     for(let i=0; i<5; i++){
-        console.log(round(playerSelection, computerSelection));      
+        let computerSelection = getComputerChoice();
+        let playerSelection = prompt("Enter rock, paper, scissor: ");
+        let score = round(playerSelection, computerSelection);
+        console.log(score);
+    }
+    if (win === 3){
+        console.log(`Congrats! You win ${win} times!`);
+    }
+    else{
+        console.log(`You lost! You won ${win} times, so bad man.`);
     }
 }
 
-const playerSelection = +prompt("Enter rock, paper, scissor: ");
-const computerSelection = getComputerChoice();
+game();
+
 
 
 
