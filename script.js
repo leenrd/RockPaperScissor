@@ -18,7 +18,18 @@ function round(playerSelection, computerSelection){
         return 'Aw! shucs, its a TIE!';
     }
     else{
-        return 'You Lose!'
+        return 'You Lose! What a Loser';
     }
 }
+
+function game(){
+    for(let i=0; i<5; i++){
+        console.log(round(playerSelection, computerSelection));      
+    }
+}
+
+const playerSelection = +prompt("Enter rock, paper, scissor: ");
+const computerSelection = getComputerChoice();
+
+
 
