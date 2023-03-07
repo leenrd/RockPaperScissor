@@ -1,49 +1,17 @@
-function getComputerChoice(){
-    const choices = ['rock', 'paper', 'scissors'];
-    const randomChoice = Math.floor(Math.random() * choices.length);
-    return choices[randomChoice];
-}
+const rockBtn = document.getElementById('rock')
+const paperBtn = document.getElementById('paper')
+const scissorsBtn = document.getElementById('scissors')
+const clearBtn = document.getElementById('clear')
 
-let win = 0;
+// rockBtn.onclick = () => console.log('rockBtn clicked')
+// paperBtn.onclick = () => console.log('paperBtn clicked')
+// scissorsBtn.onclick = () => console.log('scissorsBtn clicked')
+clearBtn.onclick = () => console.clear()
 
-function round(playerSelection, computerSelection){
-    if (playerSelection === 'rock' && computerSelection === 'scissors'){
-        win++;
-        return 'You win! rock beats scissors';
-    }
-    else if(playerSelection === 'paper' && computerSelection === 'rock'){
-        win++;
-        return 'You win! paper beats rock anytime gg'; 
-    }
-    else if(playerSelection === 'scissors' && computerSelection === 'paper'){
-        win++;
-        return 'GG EZ! scissors beats paper easy.';
-    }
-    else if(playerSelection === computerSelection){
-        return 'Aw! shucs, its a TIE!';
-    }
-    else{
-        return 'You Lose! What a Loser';
-    }
-}
+const square = document.querySelectorAll('.square')
 
-function game(){
-    for(let i=0; i<5; i++){
-        let computerSelection = getComputerChoice();
-        let playerSelection = prompt("Enter rock, paper, scissor: ");
-        let score = round(playerSelection, computerSelection);
-        console.log(score);
-    }
-    if (win === 3){
-        console.log(`Congrats! You win ${win} times!`);
-    }
-    else{
-        console.log(`You lost! You won ${win} times, so bad man.`);
-    }
-}
-
-game();
-
-
+square.forEach(square => {
+    square.onclick = () => console.log(square.value)
+})
 
 
