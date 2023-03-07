@@ -33,7 +33,7 @@ button{
 }
 
 .container{
-    outline: 1px red solid;
+    /* outline: 1px red solid; */
     padding: 1em;
     display: flex;
     justify-content: center;
