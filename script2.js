@@ -1,85 +1,81 @@
-/*
-  Rock Paper Scissors 🚀🔥
-  Concepts covered in this project
-    👉 For loops
-    👉 Dom Manipulation
-    👉 Variables
-    👉 Conditionals (if else if)
-    👉 Template Literals
-    👉 Event Listeners
-    👉 Higher order Function (Math.random())
-*/
+// labels
+const playerChoicelb = document.getElementById('player-choice')
+const botChoicelb = document.getElementById('bot-choice')
+const resultlb = document.getElementById('result')
 
-// ** getComputerChoice randomly selects between `rock` `paper` `scissors` and returns that string **
-// getComputerChoice() 👉 'Rock'
-// getComputerChoice() 👉 'Scissors'
-choices = ['rock', 'paper', 'scissors']
-function getComputerChoice(choices) {
+//bot 
+function getComputerChoice() {
+  const choices = ['rock', 'paper', 'scissors']
   const random = Math.floor(Math.random() * choices.length)
   return choices[random]
 }  
 
-console.log(getComputerChoice(choices))
 
-function getResult(playerChoice, computerChoice) {
-  // return the result of score based on if you won, drew, or lost
-  let score = 0
+function getResult(playerChoice, computerChoice){
+
   if (playerChoice === computerChoice) {
-    return score = 0
+    return 0
+  } else if (
+    (playerChoice === 'rock' && computerChoice === 'scissors') ||
+    (playerChoice === 'scissors' && computerChoice === 'paper') ||
+    (playerChoice === 'paper' && computerChoice === 'rock')
+  ) {
+    return 1
+  } else {
+    return -1
   }
   
-  if (playerChoice === 'rock' && computerChoice === 'scissors') {
-    return score++
-  } else if (computerChoice === 'rock' && playerChoice === 'scissors') {
-    return score--
-  }
+}
+
+//debug
+
+
+
+function showResult(result, playerChoice, computerChoice, resultlb) {
   
-  if (playerChoice === 'paper' && computerChoice ==='scissors') {
-    return score--
-  } else if (computerChoice === 'paper' && playerChoice ==='scissors') {
-    return score++
+  if (result == -1) {
+    resultlb.innerText = 'You Lose!'
+  } else if (result == 0) {
+    resultlb.innerText = 'It\'s a Draw!'
+  } else if (result == 1) {
+    resultlb.innerText = 'You Win!'
   }
 
-  if (playerChoice === 'paper' && computerChoice ==='rock') {
-    return score++
-  } else if (computerChoice === 'paper' && playerChoice ==='rock') {
-    return score--
-  }
+  playerChoicelb.innerText = `You chose ${playerChoice}`
+  botChoicelb.innerText = `Bot chose ${computerChoice}`
 }
 
-// ** showResult updates the DOM to `You Win!` or `You Lose!` or `It's a Draw!` based on the score. Also shows Player Choice vs. Computer Choice**
-function showResult(score, playerChoice, computerChoice) {
-  // Hint: on a score of -1
-  // You should do result.innerText = 'You Lose!'
-  // Don't forget to grab the div with the 'result' id!
-}
+let bot = getComputerChoice()
 
 // ** Calculate who won and show it on the screen **
 function onClickRPS(playerChoice) {
-  
+  getResult(playerChoice, bot)
+  showResult(res, playerChoice, bot, resultlb)
 }
 
 
-// ** Make the RPS buttons actively listen for a click and do something once a click is detected **
+
 function playGame() {
-  // use querySelector to select all RPS Buttons
+  const play = document.querySelectorAll('.rpsButton')
 
-  // * Adds an on click event listener to each RPS button and every time you click it, it calls the onClickRPS function with the RPS button that was last clicked *
+  play.forEach(button => {
+    button.onclick = () => onClickRPS(button.value, bot, getResult)
+  })
+
   
-  // 1. loop through the buttons using a forEach loop
-  // 2. Add a 'click' event listener to each button
-  // 3. Call the onClickRPS function every time someone clicks
-  // 4. Make sure to pass the currently selected rps button as an argument
-
- 
-
   // Add a click listener to the end game button that runs the endGame() function on click
-  
+  const clearBtn = document.getElementById('clear')
+  clearBtn.onclick = () => endGame()
 }
+
+
+
 
 // ** endGame function clears all the text on the DOM **
 function endGame() {
-  
+  playerChoicelb.innerText = ' '
+  botChoicelb.innerText = ' '
+  resultlb.innerText = ' '
 }
 
 playGame()
