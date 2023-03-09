@@ -10,7 +10,7 @@ function getComputerChoice() {
   return choices[random]
 }  
 
-
+//win/lose
 function getResult(playerChoice, computerChoice){
 
   if (playerChoice === computerChoice) {
@@ -27,42 +27,39 @@ function getResult(playerChoice, computerChoice){
   
 }
 
-//debug
-
-
-
-function showResult(result, playerChoice, computerChoice, resultlb) {
+//show the player
+function showResult(result, playerChoice, computerChoice, res) {
   
   if (result == -1) {
-    resultlb.innerText = 'You Lose!'
+    res.innerText = 'You Lose!'
   } else if (result == 0) {
-    resultlb.innerText = 'It\'s a Draw!'
+    res.innerText = 'It\'s a Draw!'
   } else if (result == 1) {
-    resultlb.innerText = 'You Win!'
+    res.innerText = 'You Win!'
   }
 
   playerChoicelb.innerText = `You chose ${playerChoice}`
   botChoicelb.innerText = `Bot chose ${computerChoice}`
 }
 
-let bot = getComputerChoice()
 
-// ** Calculate who won and show it on the screen **
+//waht happens onclick
 function onClickRPS(playerChoice) {
-  getResult(playerChoice, bot)
-  showResult(res, playerChoice, bot, resultlb)
+  const computerChoice = getComputerChoice()
+  const result = getResult(playerChoice, computerChoice)
+  showResult(result, playerChoice, computerChoice, resultlb)
 }
 
 
-
+//always on
 function playGame() {
   const play = document.querySelectorAll('.rpsButton')
 
   play.forEach(button => {
-    button.onclick = () => onClickRPS(button.value, bot, getResult)
+    button.onclick = () => onClickRPS(button.value)
+
   })
 
-  
   // Add a click listener to the end game button that runs the endGame() function on click
   const clearBtn = document.getElementById('clear')
   clearBtn.onclick = () => endGame()
@@ -71,7 +68,7 @@ function playGame() {
 
 
 
-// ** endGame function clears all the text on the DOM **
+// clear
 function endGame() {
   playerChoicelb.innerText = ' '
   botChoicelb.innerText = ' '
